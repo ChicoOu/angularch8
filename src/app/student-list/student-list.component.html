@@ -1,0 +1,64 @@
+<div class="container">
+  <form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm.value)">
+    <h3>学生成绩管理</h3>
+    <div *ngIf="!myForm.valid" class="alert alert-danger">
+      <strong>错误!</strong> 表单无效
+    </div>
+    <div class="form-group">
+      <label for="usernameInput">姓名</label>
+      <input type="text" id="usernameInput" class="form-control" placeholder="输入用户名" name="username"
+        [formControl]="username">
+    </div>
+    <div class="form-group">
+      <label for="genderInput">性别</label>
+      <div *ngIf="gender.hasError('required')" class="alert alert-danger">
+        <strong>错误!</strong> 性别必填
+      </div>
+      <input type="text" id="genderInput" class="form-control" [ngClass]="{'is-invalid':gender.hasError('required')}"
+        placeholder="输入性别" name="gender" [formControl]="gender">
+    </div>
+    <div class="form-group">
+      <label for="webInput">Web成绩</label>
+      <div *ngIf="web.hasError('required')" class="alert alert-danger">
+        <strong>错误!</strong> Web成绩必填
+      </div>
+      <input type="text" id="webInput" class="form-control" [ngClass]="{'is-invalid':web.hasError('required')}"
+        placeholder="输入Web成绩" name="web" [formControl]="web">
+    </div>
+    <div class="form-group">
+      <label for="embededInput">嵌入式成绩</label>
+      <div *ngIf="embeded.hasError('required')" class="alert alert-danger">
+        <strong>错误!</strong> Web成绩必填
+      </div>
+      <input type="text" id="embededInput" class="form-control" [ngClass]="{'is-invalid':embeded.hasError('required')}"
+        placeholder="输入嵌入式成绩" name="embeded" [formControl]="embeded">
+    </div>
+    <button type="submit" class="btn btn-primary">确定</button>
+  </form>
+
+  <h2>学生成绩表格</h2>
+  <table class="table table-hover table-striped">
+    <thead class="thead-dark">
+      <tr>
+        <th>名称</th>
+        <th>性别</th>
+        <th>Web</th>
+        <th>嵌入式</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{username.value}}</td>
+        <td>{{gender.value== 1?'男':'女'}}</td>
+        <td>{{web.value}}</td>
+        <td>{{embeded.value}}</td>
+      </tr>
+      <tr *ngFor="let s of students">
+        <td>{{s.name}}</td>
+        <td>{{s.gender == 1?'男':'女'}}</td>
+        <td>{{s.web}}</td>
+        <td>{{s.embeded}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

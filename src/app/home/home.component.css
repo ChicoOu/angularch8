@@ -1,0 +1,8 @@
+a{
+    text-decoration: none;
+    color: black;
+}
+
+li.active a{
+    color: white
+}
